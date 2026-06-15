@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { BottomNav } from '@/components/bottom-nav'
 import { LogoutButton } from '@/components/logout-button'
 
-export const revalidate = 30
+export const maxDuration = 60
 
 function getPriorityColor(isRush: boolean, deadline: string | null) {
   if (isRush) return { border: '#dc2626', badge: '#fee2e2', text: '#dc2626' }
