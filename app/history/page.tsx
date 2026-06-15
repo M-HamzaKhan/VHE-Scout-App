@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation'
 import { BottomNav } from '@/components/bottom-nav'
 import { LogoutButton } from '@/components/logout-button'
 
+export const revalidate = 30
+
 export default async function HistoryPage() {
   const supabase = await createClient()
   const { data } = await supabase.auth.getClaims()

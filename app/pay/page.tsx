@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation'
 import { BottomNav } from '@/components/bottom-nav'
 import { LogoutButton } from '@/components/logout-button'
 
+export const revalidate = 30
+
 function getTierProgress(monthlyCount: number, tierName: string) {
   const tiers = [
     { name: 'Scout', min: 0, max: 4, next: 'Pro Scout', multiplier: '1.00×' },
