@@ -9,6 +9,18 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get("type") as EmailOtpType | null;
   const next = searchParams.get("next") ?? "/";
 
+  const code = searchParams.get("code");
+
+  if (code) {
+    const supabase = await createClient();
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (!error) {
+      redirect("/auth/update-password");
+    } else {
+      redirect(`/auth/error?error=${error.message}`);
+    }
+  }
+
   if (token_hash && type) {
     const supabase = await createClient();
 

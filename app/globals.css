@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -65,4 +65,57 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+input, textarea {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #2563eb !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #0F1E3C !important;
+  caret-color: #0F1E3C;
+  border: 1.5px solid #d4ddf0 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset, 0 0 0 3px rgba(46, 95, 163, 0.15) !important;
+  box-shadow: 0 0 0px 1000px #ffffff inset, 0 0 0 3px rgba(46, 95, 163, 0.15) !important;
+  border-color: #2E5FA3 !important;
+}
+
+:root {
+  --navy: #0F1E3C;
+  --navy-light: #1B3A6B;
+  --vhe-blue: #2E5FA3;
+  --vhe-blue-light: #4a7fc1;
+  --vhe-blue-faint: #e8f0fb;
+  --text-muted: #5a6a8a;
+  --text-faint: #8fa0be;
+  --border: #d4ddf0;
+  --bg: #eef1f8;
+
+  --brand-header-bg: #0f172a;
+  --brand-header-border: #1e293b;
+  --brand-text-primary: #0f172a;
+  --brand-text-secondary: #64748b;
+  --brand-text-muted: #94a3b8;
+  --brand-card-bg: #ffffff;
+  --brand-card-border: #e2e8f0;
+  --brand-accent: #2563eb;
+  --brand-success: #16a34a;
+  --brand-warning: #d97706;
+  --brand-danger: #dc2626;
 }
