@@ -40,12 +40,12 @@ export default async function PayPage() {
 
   const [{ data: completedTasks }, { data: pendingTasks }, { data: bonuses }] = await Promise.all([
     supabase.from('tasks').select('final_pay, status, completed_time')
-      .eq('scout_id', scout.id).eq('status', 'Completed')
+      .eq('scout_id', scout.id).eq('status', 'Approved')
       .gte('completed_time', startOfMonth.toISOString()),
     supabase.from('tasks').select('final_pay')
-      .eq('scout_id', scout.id).in('status', ['Dispatched', 'Accepted']),
+      .eq('scout_id', scout.id).eq('status', 'Completed'),
     supabase.from('sprint_bonuses').select('bonus_type, amount, status, earned_date')
-      .eq('scout_id', scout.id).order('earned_date', { ascending: false }),
+      .eq('scout_id', scout.id).eq('status', 'Paid').order('earned_date', { ascending: false }),
   ])
 
   const monthlyEarnings = completedTasks?.reduce((sum, t) => sum + Number(t.final_pay), 0) || 0
@@ -77,12 +77,12 @@ export default async function PayPage() {
           <div className="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm px-4 py-4 text-center">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">This month</p>
             <p className="text-3xl font-bold text-green-600 tracking-tight">${monthlyEarnings.toFixed(2)}</p>
-            <p className="text-xs text-gray-500 mt-1">{completedTasks?.length || 0} tasks done</p>
+            <p className="text-xs text-gray-500 mt-1">{completedTasks?.length || 0} tasks approved</p>
           </div>
           <div className="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm px-4 py-4 text-center">
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Pending</p>
             <p className="text-3xl font-bold text-[#2563eb] tracking-tight">${pendingPay.toFixed(2)}</p>
-            <p className="text-xs text-gray-500 mt-1">{pendingTasks?.length || 0} active tasks</p>
+            <p className="text-xs text-gray-500 mt-1">{pendingTasks?.length || 0} submitted</p>
           </div>
         </div>
 
