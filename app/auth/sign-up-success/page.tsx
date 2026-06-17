@@ -27,9 +27,9 @@
               <polyline points="20 6 9 17 4 12"/>
             </svg>
           </div>
-          <h2 style={{ fontSize: "16px", fontWeight: "600", color: "#0F1E3C", marginBottom: "8px" }}>Check your email</h2>
+          <h2 style={{ fontSize: "16px", fontWeight: "600", color: "#0F1E3C", marginBottom: "8px" }}>Request received</h2>
           <p style={{ fontSize: "12px", color: "#64748b", lineHeight: "1.7", marginBottom: "20px" }}>
-            We sent a confirmation link to your email address. Click the link to activate your account and sign in.
+            Your account request has been submitted. An Ops Manager will review and approve your account. Once approved, you will be able to sign in.
           </p>
           <a href="/auth/login" style={{ display: "block", width: "100%", padding: "12px", borderRadius: "10px", background: "#2E5FA3", color: "#fff", textDecoration: "none", fontSize: "13px", fontWeight: "500", textAlign: "center" }}>
             Back to sign in

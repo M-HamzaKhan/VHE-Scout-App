@@ -22,8 +22,30 @@ export function LoginForm({
     setIsLoading(true);
     setError(null);
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
+
+      // Check if the scout account is approved
+      const { data: scout } = await supabase
+        .from('scouts')
+        .select('status')
+        .eq('user_id', data.user.id)
+        .single();
+
+      if (!scout) {
+        await supabase.auth.signOut();
+        setError('Account not approved yet. Your request has been submitted and is pending review by an Ops Manager. Once approved, you will be able to sign in.');
+        setIsLoading(false);
+        return;
+      }
+
+      if (scout.status === 'Inactive') {
+        await supabase.auth.signOut();
+        setError('Your account has been deactivated. Contact your Ops Manager for assistance.');
+        setIsLoading(false);
+        return;
+      }
+
       window.location.href = "/protected";
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
